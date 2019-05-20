@@ -22,10 +22,16 @@ Una vez registrado el usuario puede hacer todo lo anterior y:
 ### Video con las funcionalidades
 https://youtu.be/RA85Y5YT1QQ
 
+### URL de la aplicación
+
+[localhost:3006](localhost:3006)
+Para desplegar la aplicación es necesario desplegar el back y el front como se muestra acontinuación.
+
+
 
 ### Instrucciones para ejecutar la aplicación
 
-Descargue/clone el repositorio del back-end [Team01-back](https://github.com/isis3710-uniandes/Team01-back). El release para la entrega 4 es [Entrega4_Back](https://github.com/isis3710-uniandes/Team01-back/releases/tag/Entrega4back)
+Descargue/clone el repositorio del back-end [Team01-back](https://github.com/isis3710-uniandes/Team01-back). El release para la entrega 5 es [Entrega5_Back](https://github.com/isis3710-uniandes/Team01-back/releases/tag/Entrega5back)
 
 Instale las dependencias
 ### `npm install`
