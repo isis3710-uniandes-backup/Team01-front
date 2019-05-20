@@ -26,7 +26,7 @@ https://youtu.be/RA85Y5YT1QQ
 
 ### URL de la aplicación
 
-[localhost:3006](localhost:3006)
+[localhost:3006](http://localhost:3006)
 Para desplegar la aplicación es necesario desplegar el back y el front como se muestra acontinuación.
 
 
