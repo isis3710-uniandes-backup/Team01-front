@@ -31,14 +31,14 @@ export class Partidas extends Component {
                 { year: 2020, percent: 90 },
                 { year: 2021, percent: 100 },
             ],
-            backCargado : false,
-            backCargado2 : false,
-            
+            backCargado: false,
+            backCargado2: false,
+
         }
     }
     componentDidMount = () => {
         axios
-            .get('http://localhost:3000/partidas')
+            .get('https://team01back.herokuapp.com/partidas')
             .then(res => {
                 this.setState({ partidas: res.data })
                 var acc = [];
@@ -56,14 +56,14 @@ export class Partidas extends Component {
                     })
                 );
                 this.setState({ todos: todos })
-                this.setState({ cargatodos: true , backCargado:true})
+                this.setState({ cargatodos: true, backCargado: true })
                 console.log(acc);
             })
         axios
-            .get('http://localhost:3000/api/obtainall')
+            .get('https://team01back.herokuapp.com/api/obtainall')
             .then(res => {
                 this.setState({ usuarios: res.data })
-                this.setState({ cargaUsuarios: true , backCargado2: true})
+                this.setState({ cargaUsuarios: true, backCargado2: true })
             })
     }
 
@@ -76,7 +76,7 @@ export class Partidas extends Component {
             enabled: true,
             comentarios: []
         }
-        axios.post('http://localhost:3000/chats', chat).then(res => {
+        axios.post('https://team01back.herokuapp.com/chats', chat).then(res => {
             this.setState({ chats: [...this.state.chats, res.data] })
             var partidanew = {
                 idUsuarios: partida.idUsuarios,
@@ -86,19 +86,19 @@ export class Partidas extends Component {
                 idChat: this.state.chats[this.state.chats.length - 1].chatCreada._id
             }
             axios
-                .post('http://localhost:3000/partidas', partidanew)
+                .post('https://team01back.herokuapp.com/partidas', partidanew)
                 .then(res => this.setState({ partidas: [...this.state.partidas, res.data] }))
         })
     }
 
     handleDeletePartida = (id, idChat) => {
-        axios.delete(`http://localhost:3000/partidas/${id}`).then(res =>
+        axios.delete(`https://team01back.herokuapp.com/partidas/${id}`).then(res =>
             this.setState({
                 partidas: [...this.state.partidas.filter(partida => partida._id !== id)]
             })
         )
 
-        axios.delete(`http://localhost:3000/chats/${idChat}`).then(res =>
+        axios.delete(`https://team01back.herokuapp.com/chats/${idChat}`).then(res =>
             this.setState({
                 chats: [...this.state.chats.filter(chat => chat._id !== idChat)]
             })
@@ -107,7 +107,7 @@ export class Partidas extends Component {
 
     handlePutPartida = (partida, id) => {
         const { partidas } = this.state
-        axios.put(`http://localhost:3000/partidas/${id}`, partida).then(res =>
+        axios.put(`https://team01back.herokuapp.com/partidas/${id}`, partida).then(res =>
             this.setState({ partidas: [...partidas.splice(partidas.indexOf(partidas.find(partida => partida._id === id)), 1, res.data)] })
         )
     }
@@ -121,67 +121,67 @@ export class Partidas extends Component {
        rObj["puntaje"] = puntaje;
        rObj["email"] = usuarios[partida.idUsuarios[index] - 1].email;
        return rObj;*/
-       if(!this.state.backCargado || !this.state.backCargado2){
-        return(
-            <div className="m-auto">
-                <img  src= "images/loader.gif"
-                    alt={
+        if (!this.state.backCargado || !this.state.backCargado2) {
+            return (
+                <div className="m-auto">
+                    <img src="images/loader.gif"
+                        alt={
                             navigator.language.includes("en")
-                            ? "Loading data:"
-                            : "Cargando la información:" 
-                        }/>
-                <h1>{
-                            navigator.language.includes("en")
+                                ? "Loading data:"
+                                : "Cargando la información:"
+                        } />
+                    <h1>{
+                        navigator.language.includes("en")
                             ? "We're loading the data"
-                            : "Estamos cargando la información" 
-                        }</h1>
-            </div>
-        ) ;
-    }else
-    return (
-            <Fragment>
-                <h1 className="blog" style={{ color: '#0069D1' }}>
-                    <FormattedMessage
-                        id="Partida.titulo"
-                        defaultMessage="Partidas en Curso"
+                            : "Estamos cargando la información"
+                    }</h1>
+                </div>
+            );
+        } else
+            return (
+                <Fragment>
+                    <h1 className="blog" style={{ color: '#0069D1' }}>
+                        <FormattedMessage
+                            id="Partida.titulo"
+                            defaultMessage="Partidas en Curso"
+                        />
+                    </h1>
+
+
+
+
+
+                    {this.state.cargaUsuarios && partidas.map((partida, partidaIndex) => (
+                        <div className="row">
+                            <div className="col-lg-3">
+                            </div>
+                            <div className="col-lg-6" style={{ height: "600px" }}>
+
+                                <BarChart usuarios={usuarios} partida={partida} maxVal={50} key={partidaIndex} llave={partidaIndex} />
+
+
+                            </div>
+                            <div className="col-lg-3"></div>
+                        </div>
+                    ))}
+
+
+
+                    <Route exact path='/partidas/api/post' render={props => (
+                        <Fragment>
+                            <PostPartida {...props} handlePostPartida={partida => this.handlePostPartida(partida)} />
+                        </Fragment>
+                    )}
                     />
-                </h1>
 
-
-
-
-
-                {this.state.cargaUsuarios && partidas.map((partida, partidaIndex) => (
-                    <div className="row">
-                        <div className="col-lg-3">
-                        </div>
-                        <div className="col-lg-6" style={{ height: "600px" }}>
-
-                            <BarChart usuarios={usuarios} partida={partida} maxVal={50} key={partidaIndex} llave={partidaIndex} />
-
-
-                        </div>
-                        <div className="col-lg-3"></div>
-                    </div>
-                ))}
-
-
-
-                <Route exact path='/partidas/api/post' render={props => (
-                    <Fragment>
-                        <PostPartida {...props} handlePostPartida={partida => this.handlePostPartida(partida)} />
-                    </Fragment>
-                )}
-                />
-
-                <Route exact path='/partidas/api/put/:id' render={props => (
-                    <Fragment>
-                        <PutPartida {...props} handlePutPartida={(partida, id) => this.handlePutPartida(partida, id)} />
-                    </Fragment>
-                )}
-                />
-            </Fragment>
-        )
+                    <Route exact path='/partidas/api/put/:id' render={props => (
+                        <Fragment>
+                            <PutPartida {...props} handlePutPartida={(partida, id) => this.handlePutPartida(partida, id)} />
+                        </Fragment>
+                    )}
+                    />
+                </Fragment>
+            )
     }
 }
 

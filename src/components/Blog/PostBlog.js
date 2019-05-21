@@ -15,7 +15,7 @@ export class PostBlog extends Component {
 
   componentDidMount = () => {
     axios
-      .get('http://localhost:3000/materias')
+      .get('https://team01back.herokuapp.com/materias')
       .then(res => this.setState({ materias: res.data }))
   }
 
