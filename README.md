@@ -21,8 +21,11 @@ Una vez registrado el usuario puede hacer todo lo anterior y:
 * Acceder a los juegos/quices
 * Realizar los quices/ Jugar los juegos
 
-### Video con las funcionalidades
+### Video con las funcionalidades comentado
 https://youtu.be/RA85Y5YT1QQ
+
+### Video con las funcionalidades + d3/jwt
+https://youtu.be/4zTHEI374lE
 
 ### URL de la aplicación
 * Para el Backend de la aplicación: https://team01back.herokuapp.com/
