@@ -25,9 +25,9 @@ Una vez registrado el usuario puede hacer todo lo anterior y:
 https://youtu.be/RA85Y5YT1QQ
 
 ### URL de la aplicación
+* Para el Backend de la aplicación: https://team01back.herokuapp.com/
 
-[localhost:3006](http://localhost:3006)
-Para desplegar la aplicación es necesario desplegar el back y el front como se muestra acontinuación.
+* Para el frontEnd de la aplicación: https://webe5-c2a1a.web.app/
 
 
 
